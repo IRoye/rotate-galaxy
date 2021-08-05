@@ -1,0 +1,96 @@
+<!--
+ * @Descripttion: 3D 曲线
+ * @Author: yuyi
+ * @Date: 2021-08-04 13:39:40
+ * @LastEditors: yuyi
+ * @LastEditTime: 2021-08-05 00:24:40
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .galaxy {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            width: 600px;
+            height: 600px;
+            border: 1px solid blue;
+            border-radius: 300px;
+            transform-style: preserve-3d;
+            transform: rotateZ(60deg) rotateY(70deg);
+            /* transform: rotateX(60deg); */
+            /* 椭圆 */
+        }
+
+        @keyframes spins {
+            to {
+                /* 自身转一圈 */
+                /* 默认情况，变形的原点在元素的中心点，或者是元素X轴和Y轴的50%处。
+我们没有使用transform-origin改变元素原点位置的情况下，CSS变形进行的旋转、移位、缩放等操作都是以元素自己中心（变形原点）位置进行变形的 */
+                transform: rotate(1turn);
+            }
+        }
+
+        @keyframes move {
+            from {
+                transform: rotateZ(0) translateX(300px) rotateZ(0) rotateY(-56deg);
+            }
+
+            to {
+                transform: rotateZ(360deg) translateX(300px) rotateZ(-360deg) rotateY(-56deg);
+            }
+        }
+
+
+
+        .ball {
+            position: absolute;
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: wheat;
+            border-radius: 30px;
+            animation: spins 6s infinite linear, move 6s infinite linear;
+            /* animation-name: spins; */
+            /* animation-duration: 6s, 6s;
+            animation-timing-function: linear, linear;
+            animation-iteration-count: infinite, infinite; */
+            /* 这里的x轴不应该动，和球的默认x位置是一样的，动的是Y的位置 */
+            transform-origin: 50% 300px;
+            line-height: 60px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 宽300，高600，先画一个椭圆 -->
+    <div class="galaxy">
+        <div class="container">
+            <div class="ball">
+                <span>123</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-08 14:02:42
+ * @LastEditTime: 2021-08-08 15:25:31
 -->
 
 <!DOCTYPE html>
@@ -67,26 +67,34 @@
             }
         }
 
+        .commonball {
 
-        .ball {
             position: absolute;
             display: inline-block;
             width: 100px;
             height: 50px;
             background-color: wheat;
             animation: move 6s infinite linear;
-            /* animation-name: spins; */
-            /* animation-duration: 6s, 6s;
-            animation-timing-function: linear, linear;
-            animation-iteration-count: infinite, infinite; */
             /* 这里的x轴不应该动，和球的默认x位置是一样的，动的是Y的位置 */
-            transform: translateX(300px) rotateY(-70deg) rotateZ(0);
+            /* transform: translateX(300px) rotateY(-70deg) rotateZ(0); */
             line-height: 50px;
             left: 0;
             right: 0;
             top: 0;
             bottom: 0;
             margin: auto;
+        }
+
+        .ball1 {
+            animation-delay: 0s;
+        }
+
+        .ball2 {
+            animation-delay: 2s;
+        }
+
+        .ball3 {
+            animation-delay: 4s;
         }
     </style>
 </head>
@@ -95,8 +103,14 @@
     <!-- 宽300，高600，先画一个椭圆 -->
     <div class="galaxy">
         <div class="container">
-            <div class="ball">
+            <div class="ball1 commonball">
                 <span>123</span>
+            </div>
+            <div class="ball2 commonball">
+                <span>234</span>
+            </div>
+            <div class="ball3 commonball">
+                <span>456</span>
             </div>
         </div>
     </div>

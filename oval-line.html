@@ -3,7 +3,7 @@
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-05 00:24:40
+ * @LastEditTime: 2021-08-08 14:02:42
 -->
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@
         .galaxy {
             display: flex;
             justify-content: center;
+            perspective: 1000px;
         }
 
         .container {
@@ -33,9 +34,9 @@
             height: 600px;
             border: 1px solid blue;
             border-radius: 300px;
+            /* 子元素将有3D的效果 */
             transform-style: preserve-3d;
-            transform: rotateZ(60deg) rotateY(70deg);
-            /* transform: rotateX(60deg); */
+            transform: rotateZ(90deg) rotateY(-70deg);
             /* 椭圆 */
         }
 
@@ -50,33 +51,41 @@
 
         @keyframes move {
             from {
-                transform: rotateZ(0) translateX(300px) rotateZ(0) rotateY(-56deg);
+                /* rotateZ的旋转，3维下的Z轴，也就是正对我们视线的那一条，那么rotateZ，看上去就是顺时针的旋转 ，也就是达到了绕着圆环旋转的效果*/
+                /* translateX 初始是在球心，所以需要往右侧移动半径的距离，使其处在边 */
+                /*  */
+                /*  rotateY(-70deg) 这里是由于，父元素的transform是通过rotateY(70deg)达到了圆扁平的效果，同样使小球发生了扁平的效果，这里是为了回撤此效果 */
+                transform: rotateZ(0) translateX(300px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
             }
 
             to {
-                transform: rotateZ(360deg) translateX(300px) rotateZ(-360deg) rotateY(-56deg);
+                /* 动画，从0到360，也就是正转了一圈*/
+                /* translateX 效果需要一直维持 */
+                /*  */
+                /* 回撤效果需要一直维持 */
+                transform: rotateZ(360deg) translateX(300px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
             }
         }
-
 
 
         .ball {
             position: absolute;
             display: inline-block;
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 50px;
             background-color: wheat;
-            border-radius: 30px;
-            animation: spins 6s infinite linear, move 6s infinite linear;
+            animation: move 6s infinite linear;
             /* animation-name: spins; */
             /* animation-duration: 6s, 6s;
             animation-timing-function: linear, linear;
             animation-iteration-count: infinite, infinite; */
             /* 这里的x轴不应该动，和球的默认x位置是一样的，动的是Y的位置 */
-            transform-origin: 50% 300px;
-            line-height: 60px;
+            transform: translateX(300px) rotateY(-70deg) rotateZ(0);
+            line-height: 50px;
             left: 0;
             right: 0;
+            top: 0;
+            bottom: 0;
             margin: auto;
         }
     </style>

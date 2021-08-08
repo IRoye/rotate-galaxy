@@ -1,0 +1,53 @@
+<!--
+ * @Descripttion: 
+ * @Author: yuyi
+ * @Date: 2021-08-08 12:06:17
+ * @LastEditors: yuyi
+ * @LastEditTime: 2021-08-08 13:46:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            animation: identifier 6s linear infinite;
+        }
+        @keyframes identifier {
+            from {
+                /*  translateX(<translation-value>) ： 通过给定一个X方向上的数目指定一个translation。只向x轴进行移动元素，同样其基点是元素中心点，所以这里如果是向右平移的话，基点还是元素的中心点。而不是平移之前元素的中心点 */
+                /* 这两个的顺序可不能变 */
+                /* 首先第一步，rotateZ 旋转自身，形成自旋转的效果。基点已经确定好了，是当期前位置元素的中心，再次平移的话，那么是“基于”第一个动画的已经形成的效果“rotate”进行平移，也就是基点此时不会动，
+                   还是之前的点。如果translateX在前的话，那么一开始平移，基点还是之前的中心，但是已经被移动到了右侧100px，也就会在右侧100px自旋转。
+                */
+                /* 所以使用transform 一定要注意transform的动画顺序，这里很重要*/
+                transform: rotateZ(0deg) translateX(100px) rotateZ(0deg) ;
+            }
+
+            to {
+                transform: rotateZ(360deg) translateX(100px) rotateZ(-360deg);
+            }
+        }
+        .container {
+            background-color: darkgray;
+            width: 100%;
+            height: 600px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ball"></div>
+    </div>
+</body>
+</html>

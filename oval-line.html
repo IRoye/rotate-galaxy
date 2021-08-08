@@ -1,9 +1,11 @@
 <!--
  * @Descripttion: 3D 曲线
+   translate ： 该变换由二维向量构成
+
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-08 15:25:31
+ * @LastEditTime: 2021-08-08 16:20:05
 -->
 
 <!DOCTYPE html>
@@ -49,7 +51,7 @@
             }
         }
 
-        @keyframes move {
+        @keyframes move1 {
             from {
                 /* rotateZ的旋转，3维下的Z轴，也就是正对我们视线的那一条，那么rotateZ，看上去就是顺时针的旋转 ，也就是达到了绕着圆环旋转的效果*/
                 /* translateX 初始是在球心，所以需要往右侧移动半径的距离，使其处在边 */
@@ -64,6 +66,26 @@
                 /*  */
                 /* 回撤效果需要一直维持 */
                 transform: rotateZ(360deg) translateX(300px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
+            }
+        }
+
+        @keyframes move2 {
+            from {
+                transform: rotateZ(0) translate(-150px, 270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
+            }
+
+            to {
+                transform: rotateZ(360deg) translate(-150px, 270px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
+            }
+        }
+
+        @keyframes move3 {
+            from {
+                transform: rotateZ(0) translate(-150px, -270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
+            }
+
+            to {
+                transform: rotateZ(360deg) translate(-150px, -270px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
             }
         }
 
@@ -87,14 +109,20 @@
 
         .ball1 {
             animation-delay: 0s;
+            animation: move1 12s infinite linear;
+            transform: rotateZ(0) translateX(300px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
 
         .ball2 {
             animation-delay: 2s;
+            animation: move2 12s infinite linear;
+            transform: rotateZ(0) translate(-150px, 270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
 
         .ball3 {
             animation-delay: 4s;
+            animation: move3 12s infinite linear;
+            transform: rotateZ(0) translate(-150px, -270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
     </style>
 </head>

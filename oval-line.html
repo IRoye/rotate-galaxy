@@ -5,7 +5,7 @@
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-08 16:20:05
+ * @LastEditTime: 2021-08-09 20:53:01
 -->
 
 <!DOCTYPE html>
@@ -96,7 +96,6 @@
             width: 100px;
             height: 50px;
             background-color: wheat;
-            animation: move 6s infinite linear;
             /* 这里的x轴不应该动，和球的默认x位置是一样的，动的是Y的位置 */
             /* transform: translateX(300px) rotateY(-70deg) rotateZ(0); */
             line-height: 50px;
@@ -108,20 +107,20 @@
         }
 
         .ball1 {
-            animation-delay: 0s;
             animation: move1 12s infinite linear;
+            animation-delay: 4s;
             transform: rotateZ(0) translateX(300px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
 
         .ball2 {
-            animation-delay: 2s;
             animation: move2 12s infinite linear;
+            animation-delay: 4s;
             transform: rotateZ(0) translate(-150px, 270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
 
         .ball3 {
-            animation-delay: 4s;
             animation: move3 12s infinite linear;
+            animation-delay: 4s;
             transform: rotateZ(0) translate(-150px, -270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
     </style>
@@ -142,6 +141,37 @@
             </div>
         </div>
     </div>
+    <button class="pause">点击暂停</button>
 </body>
+
+<script>
+
+    setInterval(() => {
+
+        const balls = document.getElementsByClassName('commonball')
+        Array.prototype.forEach.call(balls, (item) => {
+            let state = item.style['animationPlayState'];
+            if (state === 'paused') {
+                item.style['animationPlayState'] = 'running';
+            } else {
+                item.style['animationPlayState'] = 'paused';
+            }
+        })
+
+    }, 4 * 1000)
+    // 文档对象模型Document引用的querySelector()方法返回文档中与指定选择器或选择器组匹配的第一个 HTMLElement对象
+    document.querySelector('.pause').addEventListener('click', () => {
+        const balls = document.getElementsByClassName('commonball')
+
+        Array.prototype.forEach.call(balls, (item) => {
+            let state = item.style['animationPlayState'];
+            if (state === 'paused') {
+                item.style['animationPlayState'] = 'running';
+            } else {
+                item.style['animationPlayState'] = 'paused';
+            }
+        })
+    })
+</script>
 
 </html>

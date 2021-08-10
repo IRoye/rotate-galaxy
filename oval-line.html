@@ -5,7 +5,7 @@
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-10 12:15:35
+ * @LastEditTime: 2021-08-10 20:13:51
 -->
 
 <!DOCTYPE html>
@@ -179,19 +179,28 @@
         document.getElementsByClassName("container")[0].style.transform = `rotateZ(90deg) rotateY(-70deg)`;
     })
 
-    const o = document.querySelector('.ball1');
+    let start = 0;
+
+    // 初始化，为了方便使用JS进行处理，那么初始动画信息的时候，就用JS赋值
+    const ballone = document.querySelector('.ball1');
+    ballone.style.animation = "move1 12s linear forwards"
+
     // 动画开始时事件
-    o.addEventListener('animationstart', function() {
+    ballone.addEventListener('animationstart', function() {
         console.log("动画开始");
     })
     // 动画重复运动时事件
-    o.addEventListener('animationiteration', function() {
+    ballone.addEventListener('animationiteration', function() {
         console.log("动画重复运动");
     })
     // 动画结束时事件
-    o.addEventListener('animationend', function() {
+    ballone.addEventListener('animationend', function() {
         console.log("动画结束");
         // 开始重置动画 TODO
+        console.log(ballone.style)
+        let animationNameIndex = Number(ballone.style.animationName.split('move')[1])
+        animationNameIndex = animationNameIndex < 3 ? ++animationNameIndex: 1
+        ballone.style.animationName = `move${animationNameIndex}`
     })
 </script>
 

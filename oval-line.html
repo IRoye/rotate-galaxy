@@ -5,7 +5,7 @@
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-10 20:13:51
+ * @LastEditTime: 2021-08-10 20:19:35
 -->
 
 <!DOCTYPE html>
@@ -200,7 +200,18 @@
         console.log(ballone.style)
         let animationNameIndex = Number(ballone.style.animationName.split('move')[1])
         animationNameIndex = animationNameIndex < 3 ? ++animationNameIndex: 1
-        ballone.style.animationName = `move${animationNameIndex}`
+
+        // 模拟动画暂停，处理逻辑
+        ballone.style['animationPlayState'] = 'paused';
+
+        // 开始暂停
+        console.log('小球1暂停')
+        setTimeout(() => {
+            ballone.style.animationName = `move${animationNameIndex}`
+            ballone.style['animationPlayState'] = 'running';
+        }, 1000 * 3)
+
+
     })
 </script>
 

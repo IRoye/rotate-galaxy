@@ -5,7 +5,7 @@
  * @Author: yuyi
  * @Date: 2021-08-04 13:39:40
  * @LastEditors: yuyi
- * @LastEditTime: 2021-08-09 20:53:01
+ * @LastEditTime: 2021-08-10 12:15:35
 -->
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@
                 /* translateX 效果需要一直维持 */
                 /*  */
                 /* 回撤效果需要一直维持 */
-                transform: rotateZ(360deg) translateX(300px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
+                transform: rotateZ(120deg) translateX(300px) rotateZ(-120deg) rotateX(-90deg) rotateY(90deg);
             }
         }
 
@@ -75,7 +75,7 @@
             }
 
             to {
-                transform: rotateZ(360deg) translate(-150px, 270px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
+                transform: rotateZ(120deg) translate(-150px, 270px) rotateZ(-120deg) rotateX(-90deg) rotateY(90deg);
             }
         }
 
@@ -85,7 +85,7 @@
             }
 
             to {
-                transform: rotateZ(360deg) translate(-150px, -270px) rotateZ(-360deg) rotateX(-90deg) rotateY(90deg);
+                transform: rotateZ(120deg) translate(-150px, -270px) rotateZ(-120deg) rotateX(-90deg) rotateY(90deg);
             }
         }
 
@@ -107,20 +107,24 @@
         }
 
         .ball1 {
-            animation: move1 12s infinite linear;
-            animation-delay: 4s;
+            animation: move1 12s linear;
+            animation-fill-mode: forwards;
+            /* animation-delay: 4s; */
             transform: rotateZ(0) translateX(300px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
 
         .ball2 {
-            animation: move2 12s infinite linear;
-            animation-delay: 4s;
+            animation: move2 12s linear;
+            /* 动画结束之后，停留在原点不动，默认的是回到原点 */
+            animation-fill-mode: forwards;
+            /* animation-delay: 4s; */
             transform: rotateZ(0) translate(-150px, 270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
 
         .ball3 {
-            animation: move3 12s infinite linear;
-            animation-delay: 4s;
+            animation: move3 12s linear;
+            animation-fill-mode: forwards;
+            /* animation-delay: 4s; */
             transform: rotateZ(0) translate(-150px, -270px) rotateZ(0) rotateX(-90deg) rotateY(90deg);
         }
     </style>
@@ -146,31 +150,48 @@
 
 <script>
 
-    setInterval(() => {
+    // 定时是不靠谱的，动画不准确。
+    // setInterval(() => {
 
-        const balls = document.getElementsByClassName('commonball')
-        Array.prototype.forEach.call(balls, (item) => {
-            let state = item.style['animationPlayState'];
-            if (state === 'paused') {
-                item.style['animationPlayState'] = 'running';
-            } else {
-                item.style['animationPlayState'] = 'paused';
-            }
-        })
+    //     const balls = document.getElementsByClassName('commonball')
+    //     Array.prototype.forEach.call(balls, (item) => {
+    //         let state = item.style['animationPlayState'];
+    //         if (state === 'paused') {
+    //             item.style['animationPlayState'] = 'running';
+    //         } else {
+    //             item.style['animationPlayState'] = 'paused';
+    //         }
+    //     })
 
-    }, 4 * 1000)
+    // }, 4 * 1000)
     // 文档对象模型Document引用的querySelector()方法返回文档中与指定选择器或选择器组匹配的第一个 HTMLElement对象
     document.querySelector('.pause').addEventListener('click', () => {
-        const balls = document.getElementsByClassName('commonball')
+        // const balls = document.getElementsByClassName('commonball')
 
-        Array.prototype.forEach.call(balls, (item) => {
-            let state = item.style['animationPlayState'];
-            if (state === 'paused') {
-                item.style['animationPlayState'] = 'running';
-            } else {
-                item.style['animationPlayState'] = 'paused';
-            }
-        })
+        // Array.prototype.forEach.call(balls, (item) => {
+        //     let state = item.style['animationPlayState'];
+        //     if (state === 'paused') {
+        //         item.style['animationPlayState'] = 'running';
+        //     } else {
+        //         item.style['animationPlayState'] = 'paused';
+        //     }
+        // })
+        document.getElementsByClassName("container")[0].style.transform = `rotateZ(90deg) rotateY(-70deg)`;
+    })
+
+    const o = document.querySelector('.ball1');
+    // 动画开始时事件
+    o.addEventListener('animationstart', function() {
+        console.log("动画开始");
+    })
+    // 动画重复运动时事件
+    o.addEventListener('animationiteration', function() {
+        console.log("动画重复运动");
+    })
+    // 动画结束时事件
+    o.addEventListener('animationend', function() {
+        console.log("动画结束");
+        // 开始重置动画 TODO
     })
 </script>
 
